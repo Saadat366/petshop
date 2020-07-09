@@ -1,4 +1,6 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
+from .models import Product
 
 def products(request):
-    return HttpResponse("<h1>список товаров</h1>")
+    products = Product.objects.all()
+    return render(request, "products.html", {"products": products})
