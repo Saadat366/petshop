@@ -10,6 +10,7 @@ class Product(models.Model):
         blank=True,
         verbose_name="Категория"
     )
+    image = models.ImageField(null=True, blank=True, upload_to="product_image", verbose_name="Изображение товара")
     description = models.TextField(null=True, blank=True, verbose_name = "Описание")
     price = models.DecimalField(max_digits=7, decimal_places=2, verbose_name = "Цена")
     was_bought = models.IntegerField(default=0, verbose_name = "Количество продаж") 
