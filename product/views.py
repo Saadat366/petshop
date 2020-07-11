@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import Product
+from product.models import *
 
 def products(request):
-    products = Product.objects.all()
-    return render(request, "products.html", {"products": products})
+    products = Product.objects.filter(in_stock=True)
+    return render(request, "product/products.html", {"products": products})
