@@ -11,23 +11,36 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container-fluid">
-        <br>
-        <h3>Магазин для наших любимых хвостиков</h3>
-    </div>
+<div class="container-fluid">
+    <br>
+    {% if message %}
+      <h3 class="alert alert-success">{{ message }}</h3>
+    {% else %}
+      <h3>Магазин для наших любимых хвостиков</h3>
+    {% endif %}
+</div>
       
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
     <!-- <a class="navbar-brand" href="#">Logo</a> -->
-    <ul class="navbar-nav">
+    <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" href="{% url 'products'%}">Все товары</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'product-create'%}">Добавить товар</a>
       </li>
     </ul>
     <form class="form-inline" action="{% url 'products' %}">
       {% csrf_token %}
       <input class="form-control mr-sm-2" type="text" name="key_word" placeholder="Введите поисковой запрос">
-      <button class="btn btn-success">Найти</button>
+      <button class="btn btn-success mr-sm-2">Найти</button>
     </form>
+    {% if request.user.is_authenticated %}
+      <a class="btn btn-danger" href="{% url 'logout' %}">Выход</a>
+    {% else %}
+      <a class="btn btn-primary mr-sm-2" href="{% url 'login'%}">Войти</a>
+      <a class="btn btn-primary" href="{% url 'registration'%}">Зарегистрироваться</a>
+    {% endif %}
   </nav>
   <div class="container">
     <div class="row">
