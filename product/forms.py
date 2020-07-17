@@ -9,5 +9,7 @@ class ProductForm(forms.ModelForm):
             "category",
             "image",
             "description",
-            "price"
+            "price",
+            "in_stock",
+            "exist"
         ]

@@ -2,8 +2,10 @@ from django.shortcuts import render, HttpResponse, \
     redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 from product.views import products
 from core.forms import RegistrationForm
+from product.models import Product
 
 def home(request):
     return redirect("products") # есть 3 спрособа redirect
@@ -34,3 +36,9 @@ def registration(request):
     context = {}
     context["form"] = RegistrationForm()
     return render(request, "core/registration.html", context)
+
+@login_required(login_url="login")
+def profile(request):
+    context = {}
+    context["products"] = Product.objects.filter(user=request.user)
+    return render(request, "core/profile.html", context)

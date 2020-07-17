@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required, \
+    user_passes_test
 from product.models import *
 from product.forms import ProductForm
 
@@ -12,7 +14,7 @@ def products(request):
             Q(category__name__contains=key)
             )
     else:
-        products = Product.objects.all()
+        products = Product.objects.filter(exist=True)
     return render(request, "product/products.html", {"products": products})
 
 def product(request, id):
@@ -20,18 +22,22 @@ def product(request, id):
     context["product"] = Product.objects.get(id=id)
     return render(request, "product/product.html", context)
 
+@login_required(login_url="login")
 def product_create(request):
     context = {}
     if request.method == "POST":
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            new_product = form.save()
+            new_product.user = request.user
+            new_product.save()
             context["products"] = Product.objects.filter(in_stock=True)
             context["message"] = "Товар добален"
             return render(request, "product/products.html", context)
     context["form"] = ProductForm()
     return render(request, "product/form.html", context)
 
+@login_required(login_url="login")
 def product_edit(request, id):
     product = Product.objects.get(id=id)
     context = {}
