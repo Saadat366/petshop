@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h3>Профиль пользователя <i>{{ request.user.username }}</i></h3>
+
+    <h3>Профиль пользователя <i>{{ user.username }}</i></h3>
     <ul>
-        <li>Логин: {{ request.user.username }}</li>
-        <li>e-mail: {{ request.user.email }}</li>
-        <li>ФИО: {{ request.user.get_full_name }}</li>
-        <li>Товары пользователя: {{ request.user.product.count }}</li>
+        <li>Логин: {{ user.username }}</li>
+        <li>e-mail: {{ user.email }}</li>
+        <li>ФИО: {{ user.get_full_name }}</li>
     </ul>
+    <h4>Товары этого пользователя:</h4>
     {% include 'includes/products.html' %}
+    
 {% endblock %}

@@ -9,6 +9,7 @@ def products(request):
     if "key_word" in request.GET:
         key = request.GET.get("key_word")
         products = Product.objects.filter(
+            Q(exist=True),
             Q(name__contains=key) |
             Q(description__contains=key) |
             Q(category__name__contains=key)
@@ -31,7 +32,7 @@ def product_create(request):
             new_product = form.save()
             new_product.user = request.user
             new_product.save()
-            context["products"] = Product.objects.filter(in_stock=True)
+            context["products"] = Product.objects.filter(in_stock=True, exist=True)
             context["message"] = "Товар добален"
             return render(request, "product/products.html", context)
     context["form"] = ProductForm()

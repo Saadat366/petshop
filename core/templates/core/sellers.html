@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <ul>
+        {% for seller in sellers %}
+            <h4>Продавец: {{ seller }}</h4>
+            <li>e-mail: {{ seller.email }}</li>
+            <li>ФИО: {{ seller.get_full_name }}</li>
+            <hr>
+        {% endfor %}
+    </ul>
+{% endblock %}
