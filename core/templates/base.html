@@ -49,8 +49,8 @@
     {% endif %}
   </nav>
   <div class="container">
+    {% block page %}
     <div class="row">
-      {% block page %}
         <div class="col-lg-3 col-md-2">
           Боковая панель<br>
           Боковая панель<br>
@@ -60,8 +60,8 @@
           {% block content %}
           {% endblock %}
         </div>
-      {% endblock %}
     </div>
+    {% endblock %}
   </div>
 </body>
 </html>
