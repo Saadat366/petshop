@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <h4>Нет нужной категории?</h4>
+    <a href="{% url 'category-create' %}">Добавить категорию</a>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button class="btn btn-lg btn-primary">Сохранить</button>
+    </form>
+{% endblock %}

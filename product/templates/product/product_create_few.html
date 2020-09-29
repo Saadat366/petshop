@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% formset.management_form %}
+        <table>
+            {% for form in formset %}
+                {% bootstrap_form form %}
+            {% endfor %}
+        </table>
+        <button class="btn btn-lg btn-primary">Сохранить</button>
+    </form>
+{% endblock %}

@@ -10,7 +10,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ["in_stock"] # лучше использовать на важные поля, например: цена
     # search_fields = ["name", "user__username"]
     # list_filter = ["category", "price"]
-    readonly_fields = ["name", "user", "price", "was_bought"]
+    # readonly_fields = ["name", "user", "price", "was_bought"]
     # list_per_page = 10
 
 # admin.site.register(Product, ProductAdmin)

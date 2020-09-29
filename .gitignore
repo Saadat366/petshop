@@ -5,3 +5,4 @@ petshop/settings.py
 media/*
 static/*
 !media/static/
+/.vscode

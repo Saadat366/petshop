@@ -6,7 +6,3 @@ class RegistrationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ["username", "email", "first_name", "last_name"]
-
-class ChangePasswordForm(forms.Form): # без Model потому что нет привязки к модели
-    password_1 = forms.CharField(widget=forms.PasswordInput)
-    password_2 = forms.CharField(widget=forms.PasswordInput)
